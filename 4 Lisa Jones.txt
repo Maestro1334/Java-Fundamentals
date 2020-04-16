@@ -1,0 +1,20 @@
+Report of student Lisa Jones
+
+Student Id               4
+First Name               Lisa
+Last Name                Jones
+Birthdate                15/01/1976
+Age                      44
+Group                    INF-02-A
+
+        COURSES
+
+Java                     0
+CSharp                   0
+Python                   0
+PHP                      0
+
+        RESULTS
+
+Result                   Has not passed	
+Retakes                  0

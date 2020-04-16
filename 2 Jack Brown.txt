@@ -1,0 +1,20 @@
+Report of student Jack Brown
+
+Student Id               2
+First Name               Jack
+Last Name                Brown
+Birthdate                10/09/1993
+Age                      26
+Group                    IT-02-A
+
+        COURSES
+
+Java                     0
+CSharp                   0
+Python                   0
+PHP                      0
+
+        RESULTS
+
+Result                   Has not passed	
+Retakes                  0

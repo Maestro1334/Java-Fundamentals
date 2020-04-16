@@ -68,37 +68,37 @@ public class ReportView extends GridPane {
 
         GridPane.setConstraints(reportTitleLabel, 0, 0);
 
-        GridPane.setConstraints(studentIdLabel, 0, 2);
-        GridPane.setConstraints(firstNameLabel, 0, 3);
-        GridPane.setConstraints(lastNameLabel, 0, 4);
-        GridPane.setConstraints(ageLabel, 0, 5);
+        GridPane.setConstraints(studentIdLabel, 0, 3);
+        GridPane.setConstraints(firstNameLabel, 0, 4);
+        GridPane.setConstraints(lastNameLabel, 0, 5);
+        GridPane.setConstraints(ageLabel, 0, 6);
 
-        GridPane.setConstraints(studentIdValue, 1, 2);
-        GridPane.setConstraints(firstNameValue, 1, 3);
-        GridPane.setConstraints(lastNameValue, 1, 4);
-        GridPane.setConstraints(ageValue, 1, 5);
+        GridPane.setConstraints(studentIdValue, 1, 3);
+        GridPane.setConstraints(firstNameValue, 1, 4);
+        GridPane.setConstraints(lastNameValue, 1, 5);
+        GridPane.setConstraints(ageValue, 1, 6);
 
-        GridPane.setConstraints(coursesTitleLabel, 0, 8);
+        GridPane.setConstraints(coursesTitleLabel, 0, 9);
 
-        GridPane.setConstraints(javaLabel, 0, 9);
-        GridPane.setConstraints(cSharpLabel, 0, 10);
-        GridPane.setConstraints(pythonLabel, 0, 11);
-        GridPane.setConstraints(phpLabel, 0, 12);
+        GridPane.setConstraints(javaLabel, 0, 10);
+        GridPane.setConstraints(cSharpLabel, 0, 11);
+        GridPane.setConstraints(pythonLabel, 0, 12);
+        GridPane.setConstraints(phpLabel, 0, 13);
 
-        GridPane.setConstraints(javaValue, 1, 9);
-        GridPane.setConstraints(cSharpValue, 1, 10);
-        GridPane.setConstraints(pythonValue, 1, 11);
-        GridPane.setConstraints(phpValue, 1, 12);
+        GridPane.setConstraints(javaValue, 1, 10);
+        GridPane.setConstraints(cSharpValue, 1, 11);
+        GridPane.setConstraints(pythonValue, 1, 12);
+        GridPane.setConstraints(phpValue, 1, 13);
 
-        GridPane.setConstraints(resultsTitleLabel, 0, 15);
+        GridPane.setConstraints(resultsTitleLabel, 0, 16);
 
-        GridPane.setConstraints(resultLabel, 0, 16);
-        GridPane.setConstraints(retakesLabel, 0, 17);
+        GridPane.setConstraints(resultLabel, 0, 17);
+        GridPane.setConstraints(retakesLabel, 0, 18);
 
-        GridPane.setConstraints(resultValue, 1, 16);
-        GridPane.setConstraints(retakesValue, 1, 17);
+        GridPane.setConstraints(resultValue, 1, 17);
+        GridPane.setConstraints(retakesValue, 1, 18);
 
-        GridPane.setConstraints(editReportButton, 0, 19);
+        GridPane.setConstraints(editReportButton, 0, 20);
 
         editReportButton.setOnAction(event -> {
             Scene scene = new Scene(new ReportUpdateView(window, student), 350, 600);

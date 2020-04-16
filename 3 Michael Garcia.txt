@@ -1,0 +1,20 @@
+Report of student Michael Garcia
+
+Student Id               3
+First Name               Michael
+Last Name                Garcia
+Birthdate                12/11/1980
+Age                      39
+Group                    IT-02-B
+
+        COURSES
+
+Java                     0
+CSharp                   0
+Python                   0
+PHP                      0
+
+        RESULTS
+
+Result                   Has not passed	
+Retakes                  0

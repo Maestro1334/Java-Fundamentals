@@ -1,0 +1,20 @@
+Report of student Richard Davis
+
+Student Id               7
+First Name               Richard
+Last Name                Davis
+Birthdate                03/03/1999
+Age                      21
+Group                    IT-02-A
+
+        COURSES
+
+Java                     0
+CSharp                   0
+Python                   0
+PHP                      0
+
+        RESULTS
+
+Result                   Has not passed	
+Retakes                  0

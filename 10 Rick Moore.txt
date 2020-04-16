@@ -1,0 +1,20 @@
+Report of student Rick Moore
+
+Student Id               10
+First Name               Rick
+Last Name                Moore
+Birthdate                16/01/1996
+Age                      24
+Group                    INF-02-B
+
+        COURSES
+
+Java                     0
+CSharp                   0
+Python                   0
+PHP                      0
+
+        RESULTS
+
+Result                   Has not passed	
+Retakes                  0

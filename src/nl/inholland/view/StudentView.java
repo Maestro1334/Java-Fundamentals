@@ -3,8 +3,10 @@ package nl.inholland.view;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import nl.inholland.service.ReportService;
 import nl.inholland.service.UserService;
 import nl.inholland.model.Student;
 import nl.inholland.model.User;
@@ -16,25 +18,28 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class StudentView extends VBox {
-    UserService userService;
-
+    private final UserService userService;
+    private final User currentUser;
     Scene scene;
 
     ObservableList<Student> studentList = FXCollections.observableArrayList();
     TableView<Student> tableView = new TableView<>();
 
+    Label saveReportsLabel;
     TextField emailInput, passwordInput, firstNameInput, lastNameInput, dateOfBirthInput, groupInput;
-    Button reportsButton, addButton, deleteButton;
+    Button saveReportsButton, showReportsButton, addButton, deleteButton;
 
     Boolean columnsAdded = false;
 
     public StudentView(User currentUser, UserService userService, Stage window) {
 
         this.userService = userService;
+        this.currentUser = currentUser;
 
         setPadding(new Insets(10, 10, 10, 10));
 
@@ -107,17 +112,16 @@ public class StudentView extends VBox {
                 studentList.removeAll(selectedUsers);
             });
 
-            reportsButton = new Button("Show Reports");
-            reportsButton.setWrapText(true);
-            reportsButton.setOnAction(event -> showReports(tableView, getStudents()));
+            showReportsButton = new Button("Show Reports");
+            showReportsButton.setWrapText(true);
+            showReportsButton.setOnAction(event -> showReports(tableView, getStudents()));
 
 
             HBox form = new HBox();
-            form.setPadding(new Insets(10, 10, 10, 10));
-            form.setSpacing(10);
+            setPaddingAndSpacing(form);
             form
                     .getChildren()
-                    .addAll(emailInput, passwordInput, firstNameInput, lastNameInput, dateOfBirthInput, addButton, deleteButton, reportsButton);
+                    .addAll(emailInput, passwordInput, firstNameInput, lastNameInput, dateOfBirthInput, addButton, deleteButton, showReportsButton);
 
             this.getChildren().addAll(menuBar, title, tableView, form);
         }
@@ -125,6 +129,7 @@ public class StudentView extends VBox {
             this.getChildren().addAll(menuBar, title, tableView);
         }
     }
+
 
     private void fillTableView(){
 
@@ -165,8 +170,33 @@ public class StudentView extends VBox {
                 addColumn(table, key);
             }
             addReportDetailsButton(table);
+
+            if (currentUser.getUserType() == UserType.ADMIN) {
+                HBox saveReportsBox = new HBox();
+                setPaddingAndSpacing(saveReportsBox);
+
+                saveReportsLabel = new Label("Save reports to computer: ");
+                saveReportsLabel.setFont(new Font(16));
+
+                saveReportsButton = new Button("Save Reports");
+                saveReportsButton.setOnAction(event -> saveReports());
+
+                saveReportsBox.getChildren().addAll(saveReportsLabel, saveReportsButton);
+                this.getChildren().add(saveReportsBox);
+            }
         }
         columnsAdded = true;
+    }
+
+    private void saveReports(){
+        try {
+            ReportService reportService = new ReportService();
+            reportService.SaveReports(getStudents());
+
+            msgBox("Reports saved");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addColumn(TableView<Student> table, String key) {
@@ -238,5 +268,14 @@ public class StudentView extends VBox {
             e.printStackTrace();
         }
         return LocalDate.parse(dateOfBirth, formatter);
+    }
+
+    private void setPaddingAndSpacing(HBox box){
+        box.setPadding(new Insets(10, 10, 10, 10));
+        box.setSpacing(10);
+    }
+
+    private void msgBox(String s){
+        JOptionPane.showMessageDialog(null, s);
     }
 }

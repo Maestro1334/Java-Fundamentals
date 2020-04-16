@@ -1,0 +1,20 @@
+Report of student Emma Smith
+
+Student Id               1
+First Name               Emma
+Last Name                Smith
+Birthdate                02/01/1990
+Age                      30
+Group                    IT-02-A
+
+        COURSES
+
+Java                     0
+CSharp                   0
+Python                   0
+PHP                      0
+
+        RESULTS
+
+Result                   Has not passed	
+Retakes                  0

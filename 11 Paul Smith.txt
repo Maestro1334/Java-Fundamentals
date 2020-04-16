@@ -1,0 +1,20 @@
+Report of student Paul Smith
+
+Student Id               11
+First Name               Paul
+Last Name                Smith
+Birthdate                03/01/2001
+Age                      19
+Group                    INF-02-B
+
+        COURSES
+
+Java                     0
+CSharp                   0
+Python                   0
+PHP                      0
+
+        RESULTS
+
+Result                   Has not passed	
+Retakes                  0

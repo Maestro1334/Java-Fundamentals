@@ -1,0 +1,20 @@
+Report of student Debora Hernandez
+
+Student Id               9
+First Name               Debora
+Last Name                Hernandez
+Birthdate                03/02/1993
+Age                      27
+Group                    INF-02-A
+
+        COURSES
+
+Java                     0
+CSharp                   0
+Python                   0
+PHP                      0
+
+        RESULTS
+
+Result                   Has not passed	
+Retakes                  0

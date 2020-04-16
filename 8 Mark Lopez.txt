@@ -1,0 +1,20 @@
+Report of student Mark Lopez
+
+Student Id               8
+First Name               Mark
+Last Name                Lopez
+Birthdate                22/06/1960
+Age                      59
+Group                    IT-02-B
+
+        COURSES
+
+Java                     0
+CSharp                   0
+Python                   0
+PHP                      0
+
+        RESULTS
+
+Result                   Has not passed	
+Retakes                  0

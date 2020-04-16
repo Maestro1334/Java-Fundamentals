@@ -1,0 +1,20 @@
+Report of student Linda Martinez
+
+Student Id               6
+First Name               Linda
+Last Name                Martinez
+Birthdate                16/01/1980
+Age                      40
+Group                    IT-02-A
+
+        COURSES
+
+Java                     0
+CSharp                   0
+Python                   0
+PHP                      0
+
+        RESULTS
+
+Result                   Has not passed	
+Retakes                  0
