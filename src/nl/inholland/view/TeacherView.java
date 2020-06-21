@@ -1,5 +1,7 @@
 package nl.inholland.view;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -8,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import nl.inholland.Config;
 import nl.inholland.service.UserService;
 import nl.inholland.model.Teacher;
@@ -75,7 +78,13 @@ public class TeacherView extends VBox {
         ageColumn.setMinWidth(50);
 
         TableColumn<Teacher, String> salaryColumn = new TableColumn<>("Salary");
-        salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        salaryColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Teacher, String>, ObservableValue<String>>() {
+            @Override // Needed to format the column value on 2 decimals (0.00)
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Teacher, String> t) {
+                // t.getValue() returns the Teacher instance for a particular TableView row
+                return new SimpleStringProperty(String.format("%,.2f", t.getValue().getSalary()));
+            }
+        });
         salaryColumn.setMinWidth(100);
 
 

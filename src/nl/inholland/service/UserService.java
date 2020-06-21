@@ -5,6 +5,7 @@ import nl.inholland.model.Student;
 import nl.inholland.model.Teacher;
 import nl.inholland.model.User;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +35,12 @@ public class UserService {
         studentList.add(new Student(11, "Paul","Smith","psmith@gmail.com","secret",LocalDate.of(2001, 1, 3),"INF-02-B"));
 
         teacherList = new ArrayList<>();
-        teacherList.add(new Teacher(12,"David","Taylor","dtaylor@gmail.com","secret", LocalDate.of(1970, 1, 2), 5200.0));
-        teacherList.add(new Teacher(13,"Sophy","Anderson","sanderson@gmail.com","secret", LocalDate.of(1980, 2, 3), 3500.0));
-        teacherList.add(new Teacher(14,"James","Jordon","jjordon@gmail.com","secret", LocalDate.of(1995, 3, 16), 6100.0));
-        teacherList.add(new Teacher(15,"Susan","Jackson","sjackson@gmail.com","secret", LocalDate.of(1960, 5, 15), 4520.0));
-        teacherList.add(new Teacher(16,"Mary","Lee","mlee@gmail.com","secret", LocalDate.of(1988, 4, 8), 5130.0));
-        teacherList.add(new Teacher(17, "Wimmel", "Stein", "wimmelstein@gmail.com", "secret", LocalDate.of(1975, 3,19), 1337.00));
+        teacherList.add(new Teacher(12,"David","Taylor","dtaylor@gmail.com","secret", LocalDate.of(1970, 1, 2), BigDecimal.valueOf(5300.50)));
+        teacherList.add(new Teacher(13,"Sophy","Anderson","sanderson@gmail.com","secret", LocalDate.of(1980, 2, 3), BigDecimal.valueOf(3500.15)));
+        teacherList.add(new Teacher(14,"James","Jordon","jjordon@gmail.com","secret", LocalDate.of(1995, 3, 16), BigDecimal.valueOf(6100.20)));
+        teacherList.add(new Teacher(15,"Susan","Jackson","sjackson@gmail.com","secret", LocalDate.of(1960, 5, 15), BigDecimal.valueOf(4520.00)));
+        teacherList.add(new Teacher(16,"Mary","Lee","mlee@gmail.com","secret", LocalDate.of(1988, 4, 8), BigDecimal.valueOf(5130.00)));
+        teacherList.add(new Teacher(17, "Wimmel", "Stein", "wimmelstein@gmail.com", "secret", LocalDate.of(1975, 3,19), BigDecimal.valueOf(1337.00)));
 
         managerList = new ArrayList<>();
         managerList.add(new Manager(18, "Koert", "de Wit", "kdewit@gmail.com","itsasecret",LocalDate.of(1977, 12, 23)));
