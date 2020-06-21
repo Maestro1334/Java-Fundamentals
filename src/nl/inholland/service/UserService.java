@@ -71,5 +71,27 @@ public class UserService {
         studentList.add(student);
     }
 
+    public void editStudent(Student updatedStudent) {
+        // Replaces old student object with updated student object
+        studentList.set(getStudentIndexById(updatedStudent.getId(), studentList), updatedStudent);
+    }
+
+    public void removeStudent (Student student) {
+        studentList.remove(student);
+    }
+
+    private int getStudentIndexById(int id, List<Student> studentList) {
+        try {
+            for (Student student : studentList) {
+                if (student.getId() == id) {
+                    return studentList.indexOf(student);
+                }
+            }
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 }
 

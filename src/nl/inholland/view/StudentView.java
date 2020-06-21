@@ -34,7 +34,7 @@ public class StudentView extends VBox {
 
     Label saveReportsLabel;
     TextField emailInput, passwordInput, firstNameInput, lastNameInput, dateOfBirthInput, groupInput;
-    Button saveReportsButton, showReportsButton, addButton, deleteButton;
+    Button saveReportsButton, showReportsButton, addButton, editButton, deleteButton;
 
     Boolean columnsAdded = false;
 
@@ -108,10 +108,26 @@ public class StudentView extends VBox {
 
                 clearInputs();
             });
+            editButton = new Button("Edit");
+            editButton.setOnAction( event -> {
+                String firstName = firstNameInput.getText();
+                String lastName = lastNameInput.getText();
+                String email = emailInput.getText();
+                String password = passwordInput.getText();
+                LocalDate dob = parseStringToDate(dateOfBirthInput.getText());
+                String group = groupInput.getText();
+
+                userService.editStudent(new Student(tableView.getSelectionModel().getSelectedItem().getId(), firstName, lastName, email, password, dob, group));
+                tableView.setItems(getStudents());
+
+                clearInputs();
+            });
+
             deleteButton = new Button("Delete");
             deleteButton.setOnAction( arg0 -> {
-                ObservableList<Student> selectedUsers = tableView.getSelectionModel().getSelectedItems();
-                studentList.removeAll(selectedUsers);
+                Student selectedStudent = tableView.getSelectionModel().getSelectedItem();
+                userService.removeStudent(selectedStudent);
+                tableView.setItems(getStudents());
             });
 
             showReportsButton = new Button("Show Reports");
@@ -123,7 +139,7 @@ public class StudentView extends VBox {
             setPaddingAndSpacing(form);
             form
                     .getChildren()
-                    .addAll(emailInput, passwordInput, firstNameInput, lastNameInput, dateOfBirthInput, groupInput, addButton, deleteButton, showReportsButton);
+                    .addAll(emailInput, passwordInput, firstNameInput, lastNameInput, dateOfBirthInput, groupInput, addButton, editButton, deleteButton, showReportsButton);
 
             this.getChildren().addAll(menuBar, title, tableView, form);
         }
