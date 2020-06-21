@@ -29,7 +29,6 @@ public class StudentView extends VBox {
     private final User currentUser;
     private Scene scene;
 
-    ObservableList<Student> studentList = FXCollections.observableArrayList();
     TableView<Student> tableView = new TableView<>();
 
     Label saveReportsLabel;

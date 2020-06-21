@@ -17,6 +17,7 @@ public class TeacherView extends VBox {
 
     private final UserService userService;
     private final Config config;
+
     public TeacherView(User currentUser, UserService userService, Stage window){
         this.userService = userService;
         this.config = new Config();

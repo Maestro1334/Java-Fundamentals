@@ -7,7 +7,7 @@ public class Config {
 
     public Config() {
         this.windowHeight = 400;
-        this.windowWidth = 1200;
+        this.windowWidth = 1250;
     }
 
     public int getWindowHeight() {
