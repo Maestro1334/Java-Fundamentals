@@ -20,8 +20,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import javax.swing.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StudentView extends VBox {
     private final Config config;
@@ -32,7 +36,8 @@ public class StudentView extends VBox {
     TableView<Student> tableView = new TableView<>();
 
     Label saveReportsLabel;
-    TextField emailInput, passwordInput, firstNameInput, lastNameInput, dateOfBirthInput, groupInput;
+    TextField emailInput, firstNameInput, lastNameInput, dateOfBirthInput, groupInput;
+    PasswordField passwordInput;
     Button saveReportsButton, showReportsButton, addButton, editButton, deleteButton;
 
     Boolean columnsAdded = false;
@@ -83,7 +88,7 @@ public class StudentView extends VBox {
             emailInput = new TextField();
             emailInput.setPromptText("Email");
 
-            passwordInput = new TextField();
+            passwordInput = new PasswordField();
             passwordInput.setPromptText("Password");
 
             dateOfBirthInput = new TextField();
@@ -94,32 +99,37 @@ public class StudentView extends VBox {
 
             addButton = new Button("Add");
             addButton.setOnAction( event -> {
-                String firstName = firstNameInput.getText();
-                String lastName = lastNameInput.getText();
-                String email = emailInput.getText();
-                String password = passwordInput.getText();
-                LocalDate dob = parseStringToDate(dateOfBirthInput.getText());
-                String group = groupInput.getText();
+                if (validateInputs()) {
+                    String firstName = firstNameInput.getText();
+                    String lastName = lastNameInput.getText();
+                    String email = emailInput.getText();
+                    String password = passwordInput.getText();
+                    LocalDate dob = parseStringToDate(dateOfBirthInput.getText());
+                    String group = groupInput.getText();
 
-                Student student = new Student(userService.getAllUsers().size(), firstName, lastName, email, password, dob, group);
-                userService.addStudent(student);
-                tableView.getItems().add(student);
+                    Student student = new Student(userService.getAllUsers().size(), firstName, lastName, email, password, dob, group);
+                    userService.addStudent(student);
+                    tableView.getItems().add(student);
 
-                clearInputs();
+                    clearInputs();
+                }
             });
+
             editButton = new Button("Edit");
             editButton.setOnAction( event -> {
-                String firstName = firstNameInput.getText();
-                String lastName = lastNameInput.getText();
-                String email = emailInput.getText();
-                String password = passwordInput.getText();
-                LocalDate dob = parseStringToDate(dateOfBirthInput.getText());
-                String group = groupInput.getText();
+                if (validateInputs()) {
+                    String firstName = firstNameInput.getText();
+                    String lastName = lastNameInput.getText();
+                    String email = emailInput.getText();
+                    String password = passwordInput.getText();
+                    LocalDate dob = parseStringToDate(dateOfBirthInput.getText());
+                    String group = groupInput.getText();
 
-                userService.editStudent(new Student(tableView.getSelectionModel().getSelectedItem().getId(), firstName, lastName, email, password, dob, group));
-                tableView.setItems(getStudents());
+                    userService.editStudent(new Student(tableView.getSelectionModel().getSelectedItem().getId(), firstName, lastName, email, password, dob, group));
+                    tableView.setItems(getStudents());
 
-                clearInputs();
+                    clearInputs();
+                }
             });
 
             deleteButton = new Button("Delete");
@@ -275,6 +285,56 @@ public class StudentView extends VBox {
         lastNameInput.clear();
         dateOfBirthInput.clear();
         groupInput.clear();
+    }
+
+    private boolean validateInputs() {
+        if (!emailInput.getText().equals("") || !passwordInput.getText().equals("") || !firstNameInput.getText().equals("") || !lastNameInput.getText().equals("") || !dateOfBirthInput.getText().equals("") || !groupInput.getText().equals("")) {
+            if (validateEmail(emailInput.getText())) {
+                if (validateDate(dateOfBirthInput.getText())) {
+                    return true;
+                }
+                else {
+                    msgBox("Please enter valid date");
+                    return false;
+                }
+            } else {
+                msgBox("Please enter valid email address");
+                return false;
+            }
+        }
+        else {
+            msgBox("Please fill in all fields");
+            return false;
+        }
+    }
+
+    private boolean validateEmail(String email) {
+        Pattern pattern = Pattern.compile("^.+@.+(\\.[^\\.]+)+$");
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
+    }
+
+    private boolean validateDate(String date) {
+        // Check if format used resembles 00-00-0000
+        Pattern pattern = Pattern.compile("^\\d{2}-\\d{2}-\\d{4}$");
+        Matcher matcher = pattern.matcher(date);
+
+        if(matcher.matches()) {
+            // Format ok
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            format.setLenient(false);
+
+            try {
+                // Check if valid date
+                format.parse(date);
+                return true; // Date ok
+            } catch (ParseException ex) {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     private LocalDate parseStringToDate(String dateOfBirth) {
