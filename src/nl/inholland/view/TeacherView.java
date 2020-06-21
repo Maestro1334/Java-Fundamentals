@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import nl.inholland.Config;
 import nl.inholland.service.UserService;
 import nl.inholland.model.Teacher;
 import nl.inholland.model.User;
@@ -15,9 +16,10 @@ import nl.inholland.model.User;
 public class TeacherView extends VBox {
 
     private final UserService userService;
-
-    public TeacherView (User currentUser, UserService userService, Stage window){
+    private final Config config;
+    public TeacherView(User currentUser, UserService userService, Stage window){
         this.userService = userService;
+        this.config = new Config();
 
         setPadding(new Insets(10, 10, 10, 10));
 
@@ -33,14 +35,14 @@ public class TeacherView extends VBox {
 
         studentMenuItemList.setOnAction(
                 arg0 -> {
-                    Scene scene = new Scene(new StudentView(currentUser, userService, window), 1050, 400);
+                    Scene scene = new Scene(new StudentView(currentUser, userService, window), config.getWindowWidth(), config.getWindowHeight());
                     window.setTitle("Student Management");
                     window.setScene(scene);
                 });
 
         teacherMenuItemList.setOnAction(
                 arg0 -> {
-                    Scene scene = new Scene(new TeacherView(currentUser, userService, window), 1050, 400);
+                    Scene scene = new Scene(new TeacherView(currentUser, userService, window), config.getWindowWidth(), config.getWindowHeight());
                     window.setTitle("Teacher Management");
                     window.setScene(scene);
                 });

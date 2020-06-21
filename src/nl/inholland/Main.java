@@ -15,10 +15,12 @@ import javax.swing.*;
 
 public class Main extends Application {
 
-    Scene scene;
+    private final Config config = new Config();
 
-    AuthenticationService authService = new AuthenticationService();
-    UserService userService = authService.getUserService();
+    private Scene scene;
+
+    private final AuthenticationService authService = new AuthenticationService();
+    private final UserService userService = authService.getUserService();
 
     @Override
     public void start(Stage window) {
@@ -58,12 +60,13 @@ public class Main extends Application {
                 if (!username.equals("") && !password.equals("")) {
                     if (authService.login(username, password)){
 
-                        scene = new Scene(new StudentView(authService.getCurrentUser(), this.userService, window), 1050, 400);
+                        scene = new Scene(new StudentView(authService.getCurrentUser(), this.userService, window), config.getWindowWidth(), config.getWindowHeight());
                         window.setTitle("Student Management");
                         window.setScene(scene);
                     }
                     else {
                         msgBox("Username or password incorrect. Please try again.");
+                        passwordField.clear();
                     }
                 }
                 else {

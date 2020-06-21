@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import nl.inholland.Config;
 import nl.inholland.service.ReportService;
 import nl.inholland.service.UserService;
 import nl.inholland.model.Student;
@@ -23,9 +24,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class StudentView extends VBox {
+    private final Config config;
     private final UserService userService;
     private final User currentUser;
-    Scene scene;
+    private Scene scene;
 
     ObservableList<Student> studentList = FXCollections.observableArrayList();
     TableView<Student> tableView = new TableView<>();
@@ -37,7 +39,7 @@ public class StudentView extends VBox {
     Boolean columnsAdded = false;
 
     public StudentView(User currentUser, UserService userService, Stage window) {
-
+        this.config = new Config();
         this.userService = userService;
         this.currentUser = currentUser;
 
@@ -55,14 +57,14 @@ public class StudentView extends VBox {
 
         studentMenuItemList.setOnAction(
                 arg0 -> {
-                    scene = new Scene(new StudentView(currentUser, userService, window), 1050, 400);
+                    scene = new Scene(new StudentView(currentUser, userService, window), config.getWindowWidth(), config.getWindowHeight());
                     window.setTitle("Student Management");
                     window.setScene(scene);
                 });
 
         teacherMenuItemList.setOnAction(
                 arg0 -> {
-                    scene = new Scene(new TeacherView(currentUser, userService, window), 1050, 400);
+                    scene = new Scene(new TeacherView(currentUser, userService, window), config.getWindowWidth(), config.getWindowHeight());
                     window.setTitle("Teacher Management");
                     window.setScene(scene);
                 });
@@ -100,7 +102,7 @@ public class StudentView extends VBox {
                 LocalDate dob = parseStringToDate(dateOfBirthInput.getText());
                 String group = groupInput.getText();
 
-                Student student = new Student(userService.getAllUsers().size(), email, password, firstName, lastName, dob, group);
+                Student student = new Student(userService.getAllUsers().size(), firstName, lastName, email, password, dob, group);
                 userService.addStudent(student);
                 tableView.getItems().add(student);
 
@@ -121,7 +123,7 @@ public class StudentView extends VBox {
             setPaddingAndSpacing(form);
             form
                     .getChildren()
-                    .addAll(emailInput, passwordInput, firstNameInput, lastNameInput, dateOfBirthInput, addButton, deleteButton, showReportsButton);
+                    .addAll(emailInput, passwordInput, firstNameInput, lastNameInput, dateOfBirthInput, groupInput, addButton, deleteButton, showReportsButton);
 
             this.getChildren().addAll(menuBar, title, tableView, form);
         }
