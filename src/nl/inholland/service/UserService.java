@@ -39,10 +39,11 @@ public class UserService {
         teacherList.add(new Teacher(14,"James","Jordon","jjordon@gmail.com","secret", LocalDate.of(1995, 3, 16), 6100.0));
         teacherList.add(new Teacher(15,"Susan","Jackson","sjackson@gmail.com","secret", LocalDate.of(1960, 5, 15), 4520.0));
         teacherList.add(new Teacher(16,"Mary","Lee","mlee@gmail.com","secret", LocalDate.of(1988, 4, 8), 5130.0));
+        teacherList.add(new Teacher(17, "Wimmel", "Stein", "wimmel@stein.com", "secret", LocalDate.of(1975, 3,19), 1337.00));
 
         managerList = new ArrayList<>();
-        managerList.add(new Manager(17, "Koert", "de Wit", "kdewit@gmail.com","itsasecret",LocalDate.of(1977, 12, 23)));
-        managerList.add(new Manager(18, "Karel", "Boom", "kboom@gmail.com","itsasecret",LocalDate.of(1965, 11, 12)));
+        managerList.add(new Manager(18, "Koert", "de Wit", "kdewit@gmail.com","itsasecret",LocalDate.of(1977, 12, 23)));
+        managerList.add(new Manager(19, "Karel", "Boom", "kboom@gmail.com","itsasecret",LocalDate.of(1965, 11, 12)));
 
         userList = new ArrayList<>();
     }

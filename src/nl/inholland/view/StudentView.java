@@ -256,7 +256,7 @@ public class StudentView extends VBox {
                                     reportDetailsButton.setOnAction(event -> {
                                         Student student = getTableView().getItems().get(getIndex());
                                         Stage stage = new Stage();
-                                        Scene scene = new Scene(new ReportView(stage, student), 350, 600);
+                                        Scene scene = new Scene(new ReportView(stage, student, tableView), 350, 600);
                                         stage.setTitle("Report Details");
                                         stage.setScene(scene);
                                         stage.show();

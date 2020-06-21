@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -22,15 +23,18 @@ public class ReportUpdateView extends GridPane {
     TextField newJavaTxt, newCSharpTxt, newPythonTxt, newPhpTxt;
     Button saveGradesButton, cancelButton;
 
+    TableView tableView;
+
     private final Student student;
 
-    public ReportUpdateView(Stage window, Student student) {
+    public ReportUpdateView(Stage window, Student student, TableView tableView) {
         this.setPadding(new Insets(30, 30, 30, 30));
         this.setVgap(10);
         this.setHgap(8);
 
         this.window = window;
         this.student = student;
+        this.tableView = tableView;
 
         updateTitleLabel = new Label("Update Report");
 
@@ -110,8 +114,9 @@ public class ReportUpdateView extends GridPane {
                 student.addGrade("Python", getIntegerFromTextField(newPythonTxt));
                 student.addGrade("PHP", getIntegerFromTextField(newPhpTxt));
 
+                tableView.refresh();
                 msgBox("Grades saved");
-                returnToDetails();
+                this.window.close();
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -151,7 +156,7 @@ public class ReportUpdateView extends GridPane {
     }
 
     private void returnToDetails() {
-        Scene scene = new Scene(new ReportView(window, student), 350, 600);
+        Scene scene = new Scene(new ReportView(window, student, tableView), 350, 600);
         window.setTitle("Report Details");
         window.setScene(scene);
         window.show();

@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import nl.inholland.model.Student;
@@ -15,7 +16,7 @@ public class ReportView extends GridPane {
             lastNameValue, ageValue, coursesTitleLabel, javaLabel, cSharpLabel, pythonLabel, phpLabel, javaValue,
             cSharpValue, pythonValue, phpValue, resultsTitleLabel, resultLabel, retakesLabel, resultValue, retakesValue;
 
-    public ReportView(Stage window, Student student) {
+    public ReportView(Stage window, Student student, TableView tableView) {
 
         this.setPadding(new Insets(30, 30, 30, 30));
         this.setVgap(10);
@@ -101,7 +102,7 @@ public class ReportView extends GridPane {
         GridPane.setConstraints(editReportButton, 0, 20);
 
         editReportButton.setOnAction(event -> {
-            Scene scene = new Scene(new ReportUpdateView(window, student), 350, 600);
+            Scene scene = new Scene(new ReportUpdateView(window, student, tableView), 350, 600);
             window.setTitle("Update Report");
             window.setScene(scene);
         });
