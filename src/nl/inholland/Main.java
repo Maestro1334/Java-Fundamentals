@@ -1,6 +1,8 @@
 package nl.inholland;
 
 import javafx.scene.control.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.paint.Color;
 import nl.inholland.service.AuthenticationService;
 import nl.inholland.service.UserService;
 import nl.inholland.view.StudentView;
@@ -50,7 +52,11 @@ public class Main extends Application {
         loginButton.setText("Log in");
         GridPane.setConstraints(loginButton, 1, 2);
 
-        scene = new Scene(gridPane, 300, 200);
+        Label errorLabel = new Label("");
+        errorLabel.setTextFill(Color.web("#ff0000"));
+        GridPane.setConstraints(errorLabel, 0, 3);
+
+        scene = new Scene(gridPane, 400, 200);
 
         loginButton.setOnAction( arg -> {
             String username = usernameField.getText();
@@ -65,21 +71,24 @@ public class Main extends Application {
                         window.setScene(scene);
                     }
                     else {
-                        msgBox("Username or password incorrect. Please try again.");
                         passwordField.clear();
+                        usernameField.requestFocus();
+                        throw new UnauthorizedException("Bad credentials");
+
                     }
                 }
                 else {
-                    msgBox("Please fill in both fields");
+                    usernameField.requestFocus();
+                    throw new UnauthorizedException("Empty username or password");
                 }
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
+            } catch (IllegalArgumentException | UnauthorizedException e) {
+                errorLabel.setText(String.valueOf(e.getMessage()));
             }
 
 
         });
 
-        gridPane.getChildren().addAll(userLabel, usernameField, passwordLabel, passwordField, loginButton);
+        gridPane.getChildren().addAll(userLabel, usernameField, passwordLabel, passwordField, loginButton, errorLabel);
 
         window.setScene(scene);
         window.show();
@@ -91,6 +100,13 @@ public class Main extends Application {
 
     private void msgBox(String s){
         JOptionPane.showMessageDialog(null, s);
+    }
+}
+
+class UnauthorizedException extends Exception
+{
+    public UnauthorizedException(String message) {
+        super(message);
     }
 }
 
