@@ -4,6 +4,8 @@ import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import nl.inholland.Config;
@@ -20,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -52,12 +55,15 @@ public class StudentView extends VBox {
         MenuBar menuBar = new MenuBar();
         Menu studentMenu = new Menu("Students");
         Menu teacherMenu = new Menu("Teachers");
+        Menu aboutMenu = new Menu("About");
+        MenuItem creditsMenuitem = new Menu("Credits");
         MenuItem studentMenuItemList = new Menu("Display List");
         MenuItem teacherMenuItemList = new Menu("Display List");
 
         studentMenu.getItems().addAll(studentMenuItemList);
         teacherMenu.getItems().addAll(teacherMenuItemList);
-        menuBar.getMenus().addAll(studentMenu, teacherMenu);
+        aboutMenu.getItems().addAll(creditsMenuitem);
+        menuBar.getMenus().addAll(studentMenu, teacherMenu, aboutMenu);
 
         studentMenuItemList.setOnAction(
                 arg0 -> {
@@ -72,6 +78,23 @@ public class StudentView extends VBox {
                     window.setTitle("Teacher Management");
                     window.setScene(scene);
                 });
+
+        creditsMenuitem.setOnAction(
+                arg0 -> {
+                    final Stage modal = new Stage();
+                    modal.initModality(Modality.APPLICATION_MODAL);
+                    modal.initOwner(window);
+
+                    Scene dialogScene = null;
+                    try {
+                        dialogScene = new Scene(new AboutView(), 300, 500);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    modal.setScene(dialogScene);
+                    modal.show();
+                }
+        );
 
 
         Label title = new Label("Student List");
